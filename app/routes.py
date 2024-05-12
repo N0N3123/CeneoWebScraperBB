@@ -21,7 +21,3 @@ def about():
 @app.route('/product/<product_id>')
 def product(product_id):
     return render_template("product.html", product_id=product_id)
-
-@app.route('/name/<name>')
-def name(name):
-    return f"Hello, {name}!"
