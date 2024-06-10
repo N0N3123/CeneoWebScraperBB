@@ -68,13 +68,18 @@ def extract():
 
 @app.route('/products')
 def products():
-    products_list = [filename.split(".")[0] for filename in os.listdir("app/opinions")]
+    #products_list=[filename.split(".")[0] for filename in os.listdir("app/opinions")]
+    #products=[]
+    #for product_id in products_list:
+        #with open(f"app/products/{product_id}.json","r", encoding="UTF-8") as jf:
+           # products.append(json.load(jf))
     products = []
-    for product_id in products_list:
-        with open(f"app/products/{product_id}.json", "r", encoding="UTF-8") as jf:
-           products.append(json.load(jf)) 
-    return render_template("products.html", products = products)
-
+    for filename in os.listdir('app/products'):
+        if filename.endswith('.json'):
+            file_path = os.path.join('app/products', filename)
+            with open(file_path, 'r') as jf:
+                file_data = json.load(jf)
+                products.append(file_data)
 @app.route('/about')
 def about():
     return render_template("about.html")
